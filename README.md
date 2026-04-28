@@ -1,335 +1,166 @@
-# CampusConnect
+# CampusConnect - Developer Guide
 
-A comprehensive student information and course enrollment portal. Built on the PERN stack, it streamlines course selection, waitlist management, and grade tracking for modern educational institutions.
+Welcome to the **CampusConnect** repository! This is a full-stack PERN (PostgreSQL, Express, React, Node.js) application acting as a comprehensive university course registration and student management system.
 
-## 🎯 Features
+This README is designed for developers who want to set up, understand, and contribute to the project.
 
-### Core Modules
-- **User Authentication & Authorization**: Role-based access control (Student, Faculty, Admin)
-- **Course Management**: Complete course catalog, scheduling, and capacity management
-- **Course Registration**: Real-time registration with prerequisite validation and conflict detection
-- **Result Management**: Grade entry, GPA calculation, and transcript generation
-- **Reporting & Analytics**: Comprehensive dashboards and customizable reports
-- **Notification System**: Automated email notifications for key events
+---
 
-### Key Capabilities
-- ✅ Prerequisite validation
-- ✅ Schedule conflict detection
-- ✅ Waitlist management with auto-enrollment
-- ✅ Automated GPA calculation (semester & cumulative)
-- ✅ Transcript generation
-- ✅ Academic standing calculation
-- ✅ Audit logging
-- ✅ Real-time availability updates
+## 🛠️ Tech Stack
 
-## 🏗️ Architecture
+### Frontend
+- **Framework:** React.js 18
+- **Routing:** React Router DOM v6
+- **Styling:** Custom CSS (Flexbox, CSS Grid, CSS Variables) + CSS Modules
+- **HTTP Client:** Axios
+- **State Management:** React Context API (AuthContext)
 
-### Technology Stack
-- **Frontend**: React 18 + React Router + Axios + TailwindCSS
-- **Backend**: Node.js + Express.js
-- **Database**: PostgreSQL 14+
-- **Authentication**: JWT-based authentication
-- **Email**: Nodemailer with SMTP
-- **Testing**: Jest + Supertest
+### Backend
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **Database:** PostgreSQL (using `pg` library)
+- **Authentication:** JSON Web Tokens (JWT) & bcrypt for password hashing
+- **Security:** Helmet, Express Rate Limit, CORS
 
-### Architecture Pattern
-Clean layered architecture:
-```
-├── Presentation Layer (React Frontend)
-├── API Layer (Express REST API)
-├── Business Logic Layer (Services)
-├── Data Access Layer (Repositories)
-└── Database Layer (PostgreSQL)
-```
+---
 
-## 📋 Prerequisites
+## 🚀 Quick Start Guide
 
-- Node.js 18+ and npm
-- PostgreSQL 14+
-- SMTP server access (for email notifications)
+Follow these instructions to get the project running on your local machine.
 
-## 🚀 Quick Start
-
-### 1. Clone and Install
-
-```bash
-# Install backend dependencies
-cd backend
-npm install
-
-# Install frontend dependencies
-cd ../frontend
-npm install
-```
+### 1. Prerequisites
+- **Node.js** (v18 or higher recommended)
+- **PostgreSQL** (v14 or higher) installed and running on your machine.
 
 ### 2. Database Setup
-
-```bash
-# Create PostgreSQL database
-createdb university_system
-
-# Run migrations
-cd backend
-npm run migrate
+Create an empty PostgreSQL database. You can name it `university_system`.
+```sql
+CREATE DATABASE university_system;
 ```
 
-### 3. Environment Configuration
+### 3. Environment Variables
+You need to set up environment variables in both the `backend` and `frontend` folders.
 
-Create `.env` file in backend directory:
-
+**Backend (`backend/.env`):**
 ```env
-# Server
 PORT=5000
 NODE_ENV=development
 
-# Database
+# Database Configuration
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=university_system
-DB_USER=your_db_user
-DB_PASSWORD=your_db_password
+DB_USER=postgres
+DB_PASSWORD=your_postgres_password
 
-# JWT
-JWT_SECRET=your_jwt_secret_key_change_in_production
+# Authentication
+JWT_SECRET=super_secret_jwt_key_for_development
 JWT_EXPIRES_IN=24h
-
-# Email (SMTP)
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=your_email@gmail.com
-SMTP_PASSWORD=your_app_password
-EMAIL_FROM=noreply@university.edu
-
-# Frontend URL
-FRONTEND_URL=http://localhost:3000
 ```
 
-Create `.env` file in frontend directory:
-
+**Frontend (`frontend/.env`):**
 ```env
 REACT_APP_API_URL=http://localhost:5000/api
 ```
 
-### 4. Run the Application
+### 4. Install Dependencies
+Open two separate terminals for frontend and backend.
+
+```bash
+# Terminal 1 - Backend
+cd backend
+npm install
+
+# Terminal 2 - Frontend
+cd frontend
+npm install
+```
+
+### 5. Initialize the Database (CRITICAL STEP)
+We have a custom setup script that drops old tables, creates new ones, and seeds the database with demo data (departments, courses, offerings, and users). **You must run this before starting the app.**
+
+```bash
+# In the backend directory
+npm run setup
+```
+*If successful, you will see `✅ Setup complete!` and a list of generated test credentials.*
+
+### 6. Start the Development Servers
 
 ```bash
 # Terminal 1 - Backend
 cd backend
 npm run dev
+# Starts on http://localhost:5000
 
 # Terminal 2 - Frontend
 cd frontend
 npm start
+# Starts on http://localhost:3001 (or 3000 depending on availability)
 ```
 
-The application will be available at:
-- Frontend: http://localhost:3000
-- Backend API: http://localhost:5000/api
+---
 
-## 👥 Default Users
+## 🧪 Test Credentials
 
-After running migrations, the following test users are available:
+Once you've run `npm run setup`, the following accounts are available for testing:
+- **Password for all users:** `Password@123`
 
-| Role | Email | Password | Description |
-|------|-------|----------|-------------|
-| Admin | admin@university.edu | Admin@123 | System Administrator |
-| Faculty | faculty@university.edu | Faculty@123 | Faculty Member |
-| Student | student@university.edu | Student@123 | Student User |
+| Role | Email | Use Case |
+|---|---|---|
+| **Student** | `alice.anderson@student.edu` | View dashboard, join courses, view schedule, attendance, grades |
+| **Faculty** | `dr.sharma@campusconnect.edu` | View assigned courses, grade entry |
+| **Admin** | `admin@campusconnect.edu` | Manage courses, system overview |
 
-## 📚 API Documentation
+---
 
-### Authentication Endpoints
-- `POST /api/auth/login` - User login
-- `POST /api/auth/register` - Student registration
-- `POST /api/auth/forgot-password` - Password reset request
-- `POST /api/auth/reset-password` - Reset password with token
-- `GET /api/auth/me` - Get current user profile
+## 📁 Project Structure
 
-### Course Management (Admin/Faculty)
-- `GET /api/courses` - List all courses
-- `POST /api/courses` - Create new course
-- `GET /api/courses/:id` - Get course details
-- `PUT /api/courses/:id` - Update course
-- `DELETE /api/courses/:id` - Delete course
-
-### Course Registration (Student)
-- `GET /api/registration/available-courses` - Browse available courses
-- `POST /api/registration/enroll` - Enroll in course
-- `DELETE /api/registration/drop/:enrollmentId` - Drop course
-- `GET /api/registration/my-schedule` - View current schedule
-- `POST /api/registration/waitlist` - Join waitlist
-
-### Result Management (Faculty/Admin)
-- `POST /api/grades` - Submit grades
-- `GET /api/grades/course/:courseId` - Get course grades
-- `PUT /api/grades/:id` - Update grade
-- `GET /api/transcripts/:studentId` - Generate transcript
-- `GET /api/gpa/:studentId` - Calculate GPA
-
-### Reporting (Admin)
-- `GET /api/reports/enrollment` - Enrollment statistics
-- `GET /api/reports/grade-distribution` - Grade distribution
-- `GET /api/reports/academic-standing` - Academic standing report
-
-## 🗄️ Database Schema
-
-### Core Tables
-- **users** - User authentication and profiles
-- **students** - Student-specific information
-- **faculty** - Faculty-specific information
-- **courses** - Course catalog
-- **course_offerings** - Semester-specific course instances
-- **enrollments** - Student course registrations
-- **waitlists** - Course waitlist management
-- **grades** - Student grades and results
-- **prerequisites** - Course prerequisite relationships
-- **audit_logs** - System activity tracking
-
-See `database/schema.sql` for complete schema definition.
-
-## 🧪 Testing
-
-```bash
-# Backend tests
-cd backend
-npm test
-
-# Run specific test suite
-npm test -- auth.test.js
-
-# Coverage report
-npm run test:coverage
-
-# Frontend tests
-cd frontend
-npm test
-```
-
-## 🔒 Security Features
-
-- ✅ JWT-based authentication
-- ✅ Password hashing with bcrypt (10 rounds)
-- ✅ Role-based access control (RBAC)
-- ✅ Input validation and sanitization
-- ✅ SQL injection prevention (parameterized queries)
-- ✅ XSS protection
-- ✅ CSRF protection
-- ✅ Rate limiting on authentication endpoints
-- ✅ Secure session management (30-minute timeout)
-- ✅ HTTPS enforcement (production)
-- ✅ Audit logging
-
-## 📊 Performance Optimization
-
-- Database indexing on frequently queried columns
-- Connection pooling for database
-- Caching strategies for course catalog
-- Optimized queries with proper joins
-- Pagination for large datasets
-- Lazy loading in frontend
-- Code splitting in React
-
-## 🚀 Deployment
-
-### Production Build
-
-```bash
-# Build frontend
-cd frontend
-npm run build
-
-# The build folder is ready to be deployed
-```
-
-### Environment Variables (Production)
-
-Ensure all environment variables are properly set:
-- Use strong JWT secret
-- Configure production database
-- Set up production SMTP server
-- Enable HTTPS
-- Set NODE_ENV=production
-
-### Recommended Deployment Platforms
-- **Backend**: AWS EC2, Heroku, DigitalOcean
-- **Frontend**: Vercel, Netlify, AWS S3 + CloudFront
-- **Database**: AWS RDS, Heroku Postgres, DigitalOcean Managed Database
-
-## 📖 Project Structure
-
-```
-university-system/
+```text
+SE_CP/
 ├── backend/
 │   ├── src/
-│   │   ├── config/         # Configuration files
-│   │   ├── controllers/    # Request handlers
-│   │   ├── middleware/     # Custom middleware
-│   │   ├── models/         # Database models
-│   │   ├── routes/         # API routes
-│   │   ├── services/       # Business logic
-│   │   ├── utils/          # Helper functions
-│   │   └── validators/     # Input validation
-│   ├── tests/              # Test files
-│   └── server.js           # Entry point
+│   │   ├── config/         # Database connection (database.js) and setup.js
+│   │   ├── controllers/    # Route controllers (auth, course, registration, etc.)
+│   │   ├── middleware/     # Auth middleware, Error handlers
+│   │   ├── routes/         # Express API routes definition
+│   │   └── utils/          # Logger, helpers
+│   ├── server.js           # Express App Entry Point
+│   └── package.json        
 ├── frontend/
-│   ├── public/             # Static files
-│   └── src/
-│       ├── components/     # React components
-│       ├── pages/          # Page components
-│       ├── services/       # API services
-│       ├── context/        # React context
-│       ├── hooks/          # Custom hooks
-│       └── utils/          # Helper functions
-├── database/
-│   ├── schema.sql          # Database schema
-│   ├── migrations/         # Migration scripts
-│   └── seeds/              # Seed data
-└── docs/
-    ├── API.md              # API documentation
-    ├── ARCHITECTURE.md     # Architecture details
-    └── DEPLOYMENT.md       # Deployment guide
+│   ├── public/
+│   ├── src/
+│   │   ├── components/     # Reusable UI (Navbar, Sidebar, PrivateRoute)
+│   │   ├── context/        # AuthContext (Handles global user state)
+│   │   ├── pages/          # Full page views (StudentDashboard, Register, Exams, etc.)
+│   │   ├── services/       # API integration (axios config)
+│   │   ├── App.js          # Routing configuration
+│   │   └── index.css       # Global styles and utility classes
+│   └── package.json
+├── PROJECT_EVALUATION.md   # Feature overview and demo guide
+└── README.md               # This file
 ```
 
+---
+
+## 🐞 Common Troubleshooting
+
+1. **Login fails with "Network Error" or "CORS Error"**
+   - Ensure the backend is running (`npm run dev` in the backend folder).
+   - Ensure the `backend/server.js` CORS configuration allows requests from your frontend port (usually 3000 or 3001).
+
+2. **Database connection failed / Relation does not exist**
+   - Ensure PostgreSQL service is running.
+   - Verify `DB_PASSWORD` and `DB_USER` in `backend/.env`.
+   - **Crucial:** Run `npm run setup` in the backend folder to recreate the tables and seed data. Do not use `npm run migrate` or `npm run seed` individually as the `setup.js` script handles it cleanly in one pass.
+
+3. **Port already in use**
+   - If port 5000 is taken, change the `PORT` in `backend/.env` and update `REACT_APP_API_URL` in `frontend/.env`.
+
+---
+
 ## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License.
-
-## 📞 Support
-
-For issues and questions:
-- Create an issue in the repository
-- Contact: support@university.edu
-
-## 🔄 Version History
-
-- **v1.0.0** (2026-04-21) - Initial release
-  - User authentication and RBAC
-  - Course management
-  - Course registration with validation
-  - Result management and GPA calculation
-  - Reporting and analytics
-  - Email notifications
-
-## 🎓 Compliance
-
-This system complies with:
-- FERPA (Family Educational Rights and Privacy Act)
-- WCAG 2.1 (Web Content Accessibility Guidelines)
-- University data privacy policies
-
-## ⚠️ Important Notes
-
-- Change all default passwords before production deployment
-- Configure proper backup strategies for the database
-- Set up monitoring and logging for production
-- Conduct security audit before going live
-- Perform load testing to validate performance requirements
-- Ensure 99.5% uptime SLA during critical periods
+1. Create a feature branch (`git checkout -b feature/your-feature-name`)
+2. Make your changes and commit (`git commit -m 'Added amazing feature'`)
+3. Push to the branch (`git push origin feature/your-feature-name`)
+4. Open a Pull Request for review.
