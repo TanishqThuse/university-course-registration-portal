@@ -44,7 +44,7 @@ function StudentDashboard() {
         <div className="stat-card">
           <h3>Cumulative GPA</h3>
           <div className="stat-value">
-            {profile?.cumulative_gpa ? profile.cumulative_gpa.toFixed(2) : '0.00'}
+            {profile?.cumulative_gpa ? parseFloat(profile.cumulative_gpa).toFixed(2) : '0.00'}
           </div>
           <div className="stat-label">Out of 4.0</div>
         </div>

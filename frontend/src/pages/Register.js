@@ -21,6 +21,21 @@ function Register() {
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  const DEPARTMENTS = [
+    { id: 1, name: 'Computer Science & Engineering (CSE)' },
+    { id: 2, name: 'Information Technology (IT)' },
+    { id: 3, name: 'CS with AI & ML (AIML)' },
+    { id: 4, name: 'AI & Data Science (AIDS)' },
+    { id: 5, name: 'CS with AI (CSAI)' },
+    { id: 6, name: 'Mechanical Engineering (MECH)' },
+    { id: 7, name: 'Civil Engineering (CIVIL)' },
+    { id: 8, name: 'Electronics & Telecom (EXTC)' },
+    { id: 9, name: 'Chemical Engineering (CHEM)' },
+    { id: 10, name: 'Electronics Engineering (ETRX)' },
+    { id: 11, name: 'Electronics & Computer Science (ECS)' },
+    { id: 12, name: 'Biotechnology (BIOTECH)' },
+  ];
+
   useEffect(() => {
     fetchDepartments();
   }, []);
@@ -28,9 +43,11 @@ function Register() {
   const fetchDepartments = async () => {
     try {
       const response = await api.get('/courses/departments');
-      setDepartments(response.data.data);
+      const data = response.data.data;
+      setDepartments(data && data.length > 0 ? data : DEPARTMENTS);
     } catch (err) {
-      console.error('Failed to fetch departments:', err);
+      console.error('Failed to fetch departments from API, using defaults:', err);
+      setDepartments(DEPARTMENTS);
     }
   };
 

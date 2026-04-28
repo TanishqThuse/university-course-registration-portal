@@ -1,6 +1,6 @@
-# University Course Registration and Result Management System
+# CampusConnect
 
-A comprehensive web-based solution for streamlining student course registration, managing academic records, and facilitating result processing and dissemination.
+A comprehensive student information and course enrollment portal. Built on the PERN stack, it streamlines course selection, waitlist management, and grade tracking for modern educational institutions.
 
 ## 🎯 Features
 

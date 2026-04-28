@@ -5,14 +5,19 @@
 -- DEPARTMENTS
 -- ============================================
 INSERT INTO departments (code, name, description) VALUES
-('CS', 'Computer Science', 'Department of Computer Science and Engineering'),
-('MATH', 'Mathematics', 'Department of Mathematics'),
-('PHYS', 'Physics', 'Department of Physics'),
-('ENG', 'English', 'Department of English Literature'),
-('BIO', 'Biology', 'Department of Biological Sciences'),
-('CHEM', 'Chemistry', 'Department of Chemistry'),
-('ECON', 'Economics', 'Department of Economics'),
-('HIST', 'History', 'Department of History');
+('CSE', 'Computer Science & Engineering', 'Department of Computer Science and Engineering'),
+('IT', 'Information Technology', 'Department of Information Technology'),
+('AIML', 'CS with AI & ML', 'Department of Computer Science with Artificial Intelligence and Machine Learning'),
+('AIDS', 'AI & Data Science', 'Department of Artificial Intelligence and Data Science'),
+('CSAI', 'CS with AI', 'Department of Computer Science with Artificial Intelligence'),
+('MECH', 'Mechanical Engineering', 'Department of Mechanical Engineering'),
+('CIVIL', 'Civil Engineering', 'Department of Civil Engineering'),
+('EXTC', 'Electronics & Telecom', 'Department of Electronics and Telecommunication Engineering'),
+('CHEM', 'Chemical Engineering', 'Department of Chemical Engineering'),
+('ETRX', 'Electronics Engineering', 'Department of Electronics Engineering'),
+('ECS', 'Electronics & Computer Science', 'Department of Electronics and Computer Science'),
+('BIOTECH', 'Biotechnology', 'Department of Biotechnology')
+ON CONFLICT (code) DO NOTHING;
 
 -- ============================================
 -- USERS (Password for all: hashed version of "Password@123")

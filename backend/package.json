@@ -1,11 +1,12 @@
 {
-  "name": "university-system-backend",
+  "name": "campus-connect-backend",
   "version": "1.0.0",
-  "description": "Backend API for University Course Registration and Result Management System",
+  "description": "Backend API for CampusConnect: A comprehensive student information and course enrollment portal.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "setup": "node src/config/setup.js",
     "test": "jest --coverage --detectOpenHandles",
     "test:watch": "jest --watch",
     "migrate": "node src/config/migrate.js",
