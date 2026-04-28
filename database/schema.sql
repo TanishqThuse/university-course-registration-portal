@@ -17,9 +17,6 @@ DROP TABLE IF EXISTS students CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS departments CASCADE;
 
--- Enable UUID extension
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 -- ============================================
 -- DEPARTMENTS TABLE
 -- ============================================
@@ -383,7 +380,7 @@ FOR EACH ROW EXECUTE FUNCTION update_enrollment_count();
 -- View for student transcript
 CREATE OR REPLACE VIEW student_transcript AS
 SELECT 
-    s.id as student_id,
+    s.id as student_row_id,
     s.student_id,
     u.first_name,
     u.last_name,

@@ -9,9 +9,11 @@ const { authenticate, authorize } = require('../middleware/auth');
 const { courseValidation, courseOfferingValidation, idValidation, paginationValidation } = require('../middleware/validation');
 const { asyncHandler } = require('../middleware/errorHandler');
 
+// Public routes (no auth needed)
+router.get('/departments', asyncHandler(courseController.getDepartments));
+
 // Public/authenticated routes
 router.get('/', authenticate, paginationValidation, asyncHandler(courseController.getCourses));
-router.get('/departments', authenticate, asyncHandler(courseController.getDepartments));
 router.get('/offerings', authenticate, paginationValidation, asyncHandler(courseController.getCourseOfferings));
 router.get('/:id', authenticate, idValidation, asyncHandler(courseController.getCourseById));
 
