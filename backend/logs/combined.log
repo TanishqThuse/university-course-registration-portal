@@ -183,3 +183,13 @@
 {"email":"alice.anderson@student.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 00:37:02","userId":3}
 {"email":"john.smith@university.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 00:37:22","userId":2}
 {"email":"admin@university.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 00:37:37","userId":1}
+{"level":"info","message":"Database connection established successfully","service":"university-system","timestamp":"2026-04-29 00:41:50"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"university-system","timestamp":"2026-04-29 00:41:50"}
+{"level":"info","message":"Health check available at http://localhost:5000/health","service":"university-system","timestamp":"2026-04-29 00:41:50"}
+{"email":"alice.anderson@student.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 00:51:03","userId":3}
+{"email":"john.smith@university.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 00:52:24","userId":2}
+{"email":"admin@university.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 00:52:43","userId":1}
+{"email":"alice.anderson@student.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 00:53:00","userId":3}
+{"email":"alice.anderson@student.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 01:00:41","userId":3}
+{"email":"john.smith@university.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 01:02:24","userId":2}
+{"email":"admin@university.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 01:02:40","userId":1}
