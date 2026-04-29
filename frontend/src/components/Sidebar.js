@@ -20,13 +20,18 @@ const studentNav = [
 
 const facultyNav = [
   { path: '/faculty/dashboard', icon: '🏠', label: 'Dashboard' },
+  { path: '/faculty/schedule', icon: '📅', label: 'My Schedule' },
+  { path: '/faculty/attendance', icon: '✅', label: 'Mark Attendance' },
   { path: '/faculty/grade-entry/1', icon: '📝', label: 'Grade Entry' },
 ];
 
 const adminNav = [
   { path: '/admin/dashboard', icon: '🏠', label: 'Dashboard' },
   { path: '/admin/courses', icon: '📚', label: 'Course Management' },
-  { path: '/admin/reports', icon: '📊', label: 'Reports' },
+  { path: '/admin/users', icon: '👥', label: 'User Management' },
+  { path: '/admin/reports', icon: '📊', label: 'Reports & Analytics' },
+  { path: '/admin/announcements', icon: '📢', label: 'Announcements' },
+  { path: '/admin/grievances', icon: '📣', label: 'Grievances' },
 ];
 
 function Sidebar() {
@@ -42,13 +47,19 @@ function Sidebar() {
 
   const navItems = user.role === 'student' ? studentNav : user.role === 'faculty' ? facultyNav : adminNav;
 
+  const gradientMap = {
+    student: 'linear-gradient(180deg, #1e1b4b 0%, #312e81 60%, #4c1d95 100%)',
+    faculty: 'linear-gradient(180deg, #064e3b 0%, #065f46 60%, #047857 100%)',
+    admin: 'linear-gradient(180deg, #3b0764 0%, #581c87 60%, #7c3aed 100%)',
+  };
+
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
   return (
-    <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`}>
+    <aside className={`sidebar ${collapsed ? 'sidebar-collapsed' : ''}`} style={{ background: gradientMap[user.role] || gradientMap.student }}>
       <div className="sidebar-header">
         <div className="sidebar-logo">
           {!collapsed && <span className="logo-text">🎓 CampusConnect</span>}
@@ -74,7 +85,7 @@ function Sidebar() {
           <Link
             key={item.path}
             to={item.path}
-            className={`sidebar-link ${location.pathname === item.path ? 'active' : ''}`}
+            className={`sidebar-link ${location.pathname === item.path || (item.path.includes('grade-entry') && location.pathname.includes('grade-entry')) ? 'active' : ''}`}
             title={collapsed ? item.label : ''}
           >
             <span className="nav-icon">{item.icon}</span>

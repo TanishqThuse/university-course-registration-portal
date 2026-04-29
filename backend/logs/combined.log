@@ -196,3 +196,11 @@
 {"level":"info","message":"Database connection established successfully","service":"university-system","timestamp":"2026-04-29 01:10:03"}
 {"level":"info","message":"Server running in development mode on port 5000","service":"university-system","timestamp":"2026-04-29 01:10:03"}
 {"level":"info","message":"Health check available at http://localhost:5000/health","service":"university-system","timestamp":"2026-04-29 01:10:03"}
+{"email":"alice.anderson@student.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 12:49:55","userId":3}
+{"email":"john.smith@university.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 12:50:18","userId":2}
+{"email":"alice.anderson@student.edu","level":"info","message":"User logged in","service":"university-system","timestamp":"2026-04-29 13:00:59","userId":3}
+{"level":"info","message":"SIGINT signal received: closing HTTP server","service":"university-system","timestamp":"2026-04-29 13:04:37"}
+{"level":"info","message":"Database connection established successfully","service":"university-system","timestamp":"2026-04-29 13:04:48"}
+{"level":"info","message":"Server running in development mode on port 5000","service":"university-system","timestamp":"2026-04-29 13:04:48"}
+{"level":"info","message":"Health check available at http://localhost:5000/health","service":"university-system","timestamp":"2026-04-29 13:04:48"}
+{"level":"info","message":"SIGINT signal received: closing HTTP server","service":"university-system","timestamp":"2026-04-29 13:06:20"}

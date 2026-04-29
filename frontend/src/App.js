@@ -22,6 +22,11 @@ import Fees from './pages/Fees';
 import Events from './pages/Events';
 import CareerPortal from './pages/CareerPortal';
 import Grievance from './pages/Grievance';
+import FacultyAttendance from './pages/FacultyAttendance';
+import FacultySchedule from './pages/FacultySchedule';
+import AdminUsers from './pages/AdminUsers';
+import AdminAnnouncements from './pages/AdminAnnouncements';
+import AdminGrievances from './pages/AdminGrievances';
 
 // Components
 import Sidebar from './components/Sidebar';
@@ -59,12 +64,21 @@ function AppLayout() {
 
           {/* Faculty */}
           <Route path="/faculty/dashboard" element={<PrivateRoute role="faculty"><FacultyDashboard /></PrivateRoute>} />
+          <Route path="/faculty/schedule" element={<PrivateRoute role="faculty"><FacultySchedule /></PrivateRoute>} />
+          <Route path="/faculty/attendance" element={<PrivateRoute role="faculty"><FacultyAttendance /></PrivateRoute>} />
           <Route path="/faculty/grade-entry/:offeringId" element={<PrivateRoute role="faculty"><GradeEntry /></PrivateRoute>} />
 
           {/* Admin */}
           <Route path="/admin/dashboard" element={<PrivateRoute role="admin"><AdminDashboard /></PrivateRoute>} />
           <Route path="/admin/courses" element={<PrivateRoute role="admin"><CourseManagement /></PrivateRoute>} />
+          <Route path="/admin/users" element={<PrivateRoute role="admin"><AdminUsers /></PrivateRoute>} />
           <Route path="/admin/reports" element={<PrivateRoute role="admin"><Reports /></PrivateRoute>} />
+          <Route path="/admin/announcements" element={<PrivateRoute role="admin"><AdminAnnouncements /></PrivateRoute>} />
+          <Route path="/admin/grievances" element={<PrivateRoute role="admin"><AdminGrievances /></PrivateRoute>} />
+          {/* Redirect quick-action links that don't have dedicated pages yet */}
+          <Route path="/admin/fees" element={<PrivateRoute role="admin"><AdminDashboard /></PrivateRoute>} />
+          <Route path="/admin/exams" element={<PrivateRoute role="admin"><AdminDashboard /></PrivateRoute>} />
+          <Route path="/admin/logs" element={<PrivateRoute role="admin"><AdminDashboard /></PrivateRoute>} />
 
           <Route path="/" element={<Home />} />
           <Route path="*" element={<Navigate to="/" replace />} />
