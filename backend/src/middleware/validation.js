@@ -102,8 +102,8 @@ const courseValidation = [
         .optional()
         .trim(),
     body('courseLevel')
-        .isIn(['undergraduate', 'graduate'])
-        .withMessage('Course level must be either undergraduate or graduate'),
+        .isIn(['undergraduate', 'graduate', 'postgraduate'])
+        .withMessage('Course level must be undergraduate, graduate, or postgraduate'),
     validate
 ];
 
@@ -188,6 +188,31 @@ const idValidation = [
     validate
 ];
 
+// For routes that use :courseOfferingId or :gradeId param instead of :id
+const offeringIdValidation = [
+    param('courseOfferingId')
+        .optional()
+        .isInt()
+        .withMessage('Course offering ID must be a valid integer'),
+    validate
+];
+
+const gradeIdValidation = [
+    param('gradeId')
+        .optional()
+        .isInt()
+        .withMessage('Grade ID must be a valid integer'),
+    validate
+];
+
+const studentIdValidation = [
+    param('studentId')
+        .optional()
+        .isInt()
+        .withMessage('Student ID must be a valid integer'),
+    validate
+];
+
 /**
  * Pagination validation
  */
@@ -212,5 +237,8 @@ module.exports = {
     enrollmentValidation,
     gradeValidation,
     idValidation,
+    offeringIdValidation,
+    gradeIdValidation,
+    studentIdValidation,
     paginationValidation
 };
